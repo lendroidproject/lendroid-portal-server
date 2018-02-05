@@ -19,7 +19,7 @@ class Index(Resource):
         return render_template('index.html')
 api.add_resource(Index, '/', endpoint='index')
 
-class LoanOffer(Resource):
+class Offer(Resource):
     def get(self):
         """ Return a list of existing loan offers"""
         return [{ 'id': 1, 'order': 'test order'}]
@@ -27,5 +27,5 @@ class LoanOffer(Resource):
     def post(self):
         if not request.json:
             abort(400, {"error": "Expected application/json"})
-        return { 'success': True }, 201
-api.add_resource(LoanOffer, '/api/loan_offers', endpoint='loan_offers')
+        return { 'data': request.json }, 201
+api.add_resource(LoanOffer, '/offers', endpoint='offers')
