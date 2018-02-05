@@ -1,0 +1,29 @@
+runtime: python27
+api_version: 1
+threadsafe: yes
+
+handlers:
+
+- url: /favicon.ico
+  static_files: templates/favicon.ico
+  upload: templates/favicon.ico
+  secure: always
+
+- url: /service-worker.js
+  static_files: templates/service-worker.js
+  upload: templates/service-worker.js
+  secure: always
+
+- url: /static
+  secure: always
+  static_dir: templates/static
+
+- url: .*
+  secure: always
+  script: main.app
+
+libraries:
+- name: jinja2
+  version: "2.6"
+- name: markupsafe
+  version: "0.15"
