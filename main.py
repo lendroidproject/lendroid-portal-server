@@ -1,12 +1,15 @@
-import urllib
-import json
 from flask import Flask, render_template, request, jsonify, abort
-from google.appengine.api import urlfetch, mail, app_identity
 from flask_restful import Resource, Api
+from google.appengine.api import app_identity
+from google.appengine.ext import ndb
 
 app = Flask(__name__)
 app.config['DEBUG'] = False
 api = Api(app)
+
+
+class OfferModel(ndb.Model):
+    creatorAddress = ndb.StringProperty()
 
 @app.errorhandler(404)
 def page_not_found(e):
@@ -17,15 +20,20 @@ class Index(Resource):
     def get(self):
         """ Render the Index page"""
         return render_template('index.html')
-api.add_resource(Index, '/', endpoint='index')
 
-class Offer(Resource):
+class Offers(Resource):
     def get(self):
         """ Return a list of existing loan offers"""
-        return [{ 'id': 1, 'order': 'test order'}]
+        offers = OfferModel.query().fetch()
+        offers_list = [{'id': offer.creatorAddress } for offer in offers]
+        return jsonify(offers=offers_list)
 
     def post(self):
         if not request.json:
             abort(400, {"error": "Expected application/json"})
-        return { 'data': request.json }, 201
-api.add_resource(LoanOffer, '/offers', endpoint='offers')
+        offer = OfferModel(creatorAddress="0x123456")
+        key = offer.put()
+        return { 'id': key.id() }, 201
+
+api.add_resource(Offers, '/offers', endpoint='offers')
+api.add_resource(Index, '/', endpoint='index')

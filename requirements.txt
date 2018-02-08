@@ -7,3 +7,4 @@
 Flask==0.10
 pycountry==17.9.23
 flask-restful==0.3.6
+google-cloud-datastore==1.4.0

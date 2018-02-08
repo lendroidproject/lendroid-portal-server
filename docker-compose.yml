@@ -1,0 +1,21 @@
+version: "3.2"
+
+services:
+  portal_app:
+    image: google/cloud-sdk:160.0.0
+    volumes:
+    - ./:/app:ro
+    entrypoint: dev_appserver.py
+    ports:
+    - "8000:8000"
+    - "8080:8080"
+  gcloud_datastore:
+    image: google/cloud-sdk:160.0.0
+    volumes:
+    - data:/data
+    entrypoint: gcloud beta emulators datastore start --project=dev --host-port localhost:8888 --data-dir=/data
+    ports:
+    - "8888:8888"
+
+volumes:
+  data:
