@@ -5,7 +5,7 @@ services:
     image: google/cloud-sdk:160.0.0
     volumes:
     - ./:/app:ro
-    entrypoint: dev_appserver.py
+    entrypoint: dev_appserver.py -A dev --env_var DATASTORE_EMULATOR_HOST=gcloud_datastore:8888 --host 0.0.0.0 /app/app.yaml
     ports:
     - "8000:8000"
     - "8080:8080"
