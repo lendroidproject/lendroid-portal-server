@@ -78,5 +78,5 @@ class Offers(Resource):
         return { 'id': key.id() }, 201
 
 api.add_resource(Offers, '/offers', endpoint='offers')
-api.add_resource(Offers, '/markets', endpoint='markets')
+api.add_resource(Markets, '/markets', endpoint='markets')
 api.add_resource(Index, '/', endpoint='index')
