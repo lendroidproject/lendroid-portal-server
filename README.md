@@ -89,6 +89,7 @@ The frontend is developed using the [React](https://github.com/facebookincubator
           "symbol": "ETH"
         }
         ...
+     }
   }
   ```
 
