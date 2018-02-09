@@ -16,15 +16,42 @@ The frontend is developed using the [React](https://github.com/facebookincubator
   * `docker-compose up`
 2. The command will start and instance of the python server accessible at:
   * [http://localhost:8080/](http://localhost:8080/)
-3. The commnad will also start an instance of the google cloud datastore emulator at:
+3. The command will also start an instance of the google cloud datastore emulator at:
   * [http://localhost:8888/](http://localhost:8888/)
 
 ### Interacting with the app
 1. To fetch all existing offers:
   * `GET http://localhost:8080/offers`
+  * curl example:
+    ```
+    > GET /offers HTTP/1.1
+    > Host: localhost:8080
+    > User-Agent: curl/7.54.0
+    > Accept: */*
+    >
+    < HTTP/1.1 200 OK
+    < content-type: application/json
+    < Server: Development/2.0
+    <
+    {
+      "offers": [
+        {
+          "baseTokenAddress": null,
+          "costAmount": 100,
+          "costToken": "ETH",
+          "ecSignature": "0x65796199fc0d1ee0b599011845a2c54fa4b88051cf10aa2cc34000c6a",
+          "lenderAddress": "0x2fd5d34162fa812e7d71bd5305954f4733e9271c",
+          "loanQuantity": 0,
+          "loanToken": "OMG",
+          "loanTokenAddress": null,
+          "quoteTokenAddress": null,
+          "tokenPair": "OMG/ETH"
+        }
+    }
+    ```
 2. TO create an offer:
   * `POST http://localhost:8080/offers`
-  * `curl` Example:
+  * curl example:
     ```
     curl 'http://localhost:8080/offers' \
     -H 'Content-Type: application/json;charset=UTF-8' \
