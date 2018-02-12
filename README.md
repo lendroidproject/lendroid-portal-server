@@ -20,7 +20,16 @@ The frontend is developed using the [React](https://github.com/facebookincubator
   * [http://localhost:8888/](http://localhost:8888/)
 
 ### Interacting with the app
-1. To fetch all existing offers:
+1. To create an offer:
+  * `POST http://localhost:8080/offers`
+  * curl example:
+    ```
+    curl 'http://localhost:8080/offers' \
+    -H 'Content-Type: application/json;charset=UTF-8' \
+    -H 'Accept: application/json, text/plain, */*' \
+    --data-binary '{"lenderAddress":"0x23614cad46228c932caef635ca5279","loanTokenAddress":"0x73de023fc01ab","loanTokenAmount":"1000000000000000000000","loanCostTokenAddress":"0x023e1abfc073d","loanCostTokenAmount":"1000000000000000000","loanInterestTokenAddress":"0x023e1abfc073d","loanInterestTokenAmount":"1000000000000000000","ecSignature":"0xefa60b2ad38a0df94a0b7a2ec03563c0888d532ea3b22b8c00d0c711ceb01b9e55ac7eed2d03cf5465b443ad8b461f057c9dd17771d9ba93d70d8f451305e24f1c"}'
+    ```
+2. To fetch all existing offers:
   * `GET http://localhost:8080/offers`
   * curl example:
     ```
@@ -33,30 +42,30 @@ The frontend is developed using the [React](https://github.com/facebookincubator
     < content-type: application/json
     < Server: Development/2.0
     <
-    {
-      "offers": [
-        {
-          "baseTokenAddress": null,
-          "costAmount": 100,
-          "costToken": "ETH",
-          "ecSignature": "0x65796199fc0d1ee0b599011845a2c54fa4b88051cf10aa2cc34000c6a",
-          "lenderAddress": "0x2fd5d34162fa812e7d71bd5305954f4733e9271c",
-          "loanQuantity": 0,
-          "loanToken": "OMG",
-          "loanTokenAddress": null,
-          "quoteTokenAddress": null,
-          "tokenPair": "OMG/ETH"
-        }
-    }
-    ```
-2. To create an offer:
-  * `POST http://localhost:8080/offers`
-  * curl example:
-    ```
-    curl 'http://localhost:8080/offers' \
-    -H 'Content-Type: application/json;charset=UTF-8' \
-    -H 'Accept: application/json, text/plain, */*' \
-    --data-binary '{"lenderAddress":"0x23614cad46228c932caef635ca5279","quoteTokenAddress":"0x023e1abfc073d","baseTokenAddress":"0x73de023fc01ab","tokenPair":"OMG/ETH","loanQuantity":100,"loanToken":"OMG","loanTokenAddress":"0x73de023fc01ab","costAmount":10,"costToken":"ETH","ecSignature":"0xeb2f7a1e4f97ac36be057aa2d007c8e2cc6be9d09618390a29aadf9a839fa140593d8f34f3dd415edf21851c00e7ed78838003dd9b294e7a61a41a4def90b4051b"}'
+      {
+        offers: [
+          {
+            ecSignature: "0xefa60b2ad38a0df94a0b7a2ec03563c0888d532ea3b22b8c00d0c711ceb01b9e55ac7eed2d",
+            lenderAddress: "0x23614cad46228c932caef635ca5279",
+            loanCostTokenAddress: "0x023e1abfc073d",
+            loanCostTokenAmount: "1000000000000000000",
+            loanInterestTokenAddress: "0x023e1abfc073d",
+            loanInterestTokenAmount: "1000000000000000000",
+            loanTokenAddress: "0x73de023fc01ab",
+            loanTokenAmount: "1000000000000000000000"
+          },
+          {
+            ecSignature: "0xf7d3998f7b859eea4f2a370afbfd4a42ba8af96695cd02efbab10aaabf38deb7267a86581f",
+            lenderAddress: "0x23614cad46228c932caef635ca5279",
+            loanCostTokenAddress: "0x023e1abfc073d",
+            loanCostTokenAmount: "1000000000000000000",
+            loanInterestTokenAddress: "0x023e1abfc073d",
+            loanInterestTokenAmount: "1000000000000000000",
+            loanTokenAddress: "0x73de023fc01ab",
+            loanTokenAmount: "10000000000000000000000"
+          }
+        ]
+      }
     ```
 3. To get market information:
   * `GET http://localhost:8080/markets`
