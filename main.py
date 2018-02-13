@@ -79,11 +79,15 @@ class Offers(Resource):
         return jsonify(offers=offers_list)
 
     def post(self):
-        if not request.json:
-            abort(400, {"error": "Expected application/json"})
+      try:
+        data = request.get_json(force=True)
         offer = models.OfferModel(**request.json)
         key = offer.put()
         return { 'id': key.id() }, 201
+      except AttributeError as exc:
+          abort(400, {"error": exc.message})
+      except Exception as exc:
+          abort(400, {"error": exc.message })
 
 api.add_resource(Offers, '/offers', endpoint='offers')
 api.add_resource(Markets, '/markets', endpoint='markets')
