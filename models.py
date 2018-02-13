@@ -3,6 +3,7 @@ from google.appengine.ext import ndb
 class OfferModel(ndb.Model):
     lenderAddress = ndb.StringProperty(required=True) # loan creator wallet adddress
     market = ndb.StringProperty(required=True) # token pair
+    wranglerAddress = ndb.StringProperty(required=True) # wrangler address
     loanTokenAddress = ndb.StringProperty(required=True) # OMG contract address
     loanTokenSymbol = ndb.StringProperty(required=True) # OMG contract address
     loanTokenAmount = ndb.StringProperty(required=True) # 1000
