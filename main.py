@@ -57,10 +57,15 @@ def page_not_found(e):
     """Return a custom 404 error."""
     return 'Sorry, nothing at this URL.', 404
 
+def output_html(data, code, headers=None):
+    resp = app.make_response(data)
+    resp.status_code = code
+    return resp
+
 class Index(Resource):
     def get(self):
         """ Render the Index page"""
-        return render_template('index.html')
+        return output_html(render_template('index.html'), 200)
 
 class Markets(Resource):
     def get(self):
