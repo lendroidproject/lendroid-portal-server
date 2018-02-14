@@ -57,6 +57,22 @@ def page_not_found(e):
     """Return a custom 404 error."""
     return 'Sorry, nothing at this URL.', 404
 
+@app.route('/create-offers', methods=['GET'])
+def createOffers():
+      return render_template('index.html')
+
+@app.route('/view-offers', methods=['GET'])
+def viewOffers():
+      return render_template('index.html')
+  
+@app.route('/commit-funds', methods=['GET'])
+def commitOffers():
+      return render_template('index.html')
+
+@app.route('/deposit-funds', methods=['GET'])
+def depositFunds():
+      return render_template('index.html')
+
 def output_html(data, code, headers=None):
     resp = app.make_response(data)
     resp.status_code = code
