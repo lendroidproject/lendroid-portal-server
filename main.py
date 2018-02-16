@@ -64,7 +64,7 @@ def createOffers():
 @app.route('/view-offers', methods=['GET'])
 def viewOffers():
       return render_template('index.html')
-  
+
 @app.route('/commit-funds', methods=['GET'])
 def commitOffers():
       return render_template('index.html')
@@ -105,6 +105,22 @@ class Offers(Resource):
       except Exception as exc:
           abort(400, {"error": exc.message })
 
+
+class Orders(Resource):
+    def get(self):
+        """ Return a list of existing loan offers"""
+        orders = models.OrderModel.query().fetch()
+        orders_list = [order.to_dict() for order in orders]
+        return jsonify(orders=orders_list)
+
+    def post(self):
+        if not request.json:
+            abort(400, {"error": "Expected application/json"})
+        order = models.OrderModel(**request.json)
+        key = order.put()
+        return { 'id': key.id() }, 201
+
+api.add_resource(Orders, '/orders', endpoint='orders')
 api.add_resource(Offers, '/offers', endpoint='offers')
 api.add_resource(Markets, '/markets', endpoint='markets')
 api.add_resource(Index, '/', endpoint='index')
