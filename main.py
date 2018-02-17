@@ -57,8 +57,8 @@ def page_not_found(e):
     """Return a custom 404 error."""
     return 'Sorry, nothing at this URL.', 404
 
-@app.route('/create-offers', methods=['GET'])
-def createOffers():
+@app.route('/create-offer', methods=['GET'])
+def createOffer():
       return render_template('index.html')
 
 @app.route('/view-offers', methods=['GET'])
